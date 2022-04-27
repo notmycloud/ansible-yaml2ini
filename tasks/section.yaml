@@ -1,0 +1,7 @@
+---
+- name: "Configure section [{{ section.key }}]"
+  ansible.builtin.include_tasks:
+    file: option.yaml
+  loop: "{{ section.value | dict2items }}"
+  loop_control:
+    loop_var: option

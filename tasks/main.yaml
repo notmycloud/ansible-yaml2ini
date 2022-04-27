@@ -1,0 +1,7 @@
+---
+- name: "Configure ini sections"
+  ansible.builtin.include_tasks:
+    file: section.yaml
+  loop: "{{ YAML2INI_DATA | dict2items }}"
+  loop_control:
+    loop_var: section

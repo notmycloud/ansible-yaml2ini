@@ -1,13 +1,3 @@
-## Ansible Yaml2INI
-## Description
-Write an INI file given a provided YAML dictionary.
-
-## Usage
-Provide the following variables for this role to operate correctly.
-`YAML2INI_DATA` will contain all of the data to be written to the INI file.
-`YAML2INI_QUOTE_VALUES` will encapsulate the value of all options in a double quote.
-`YAML2INI_OPTIONS` sets configuration options for the `community.general.ini_file` module. Pay special attention to the notes below.
-```
 ---
 YAML2INI_DATA:
   Section1:
@@ -29,10 +19,3 @@ YAML2INI_OPTIONS: # Key=Value pairs for all community.general.ini_file parameter
   section: # This parameter will be ignored as is defined as part of YAML2INI_DATA
   option: # This parameter will be ignored as is defined as part of YAML2INI_DATA
   value: # This parameter will be ignored as is defined as part of YAML2INI_DATA
-```
-
-## Support
-For support, please raise an issue and provide the following items
-- Sample task/playbook to replicate your issue
-- Resultant file that is created.
-- If modifying an existing file, please provide the unmodified version as well.
