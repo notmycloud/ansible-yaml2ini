@@ -2,54 +2,54 @@
 - name: "Configure option [{{ section.key }}] - [{{ option.key }}]"
   community.general.ini_file:
     path: "{{ YAML2INI_OPTIONS.path }}"
-    section: "{{ section.key }}" 
-    option: "{{ option.key }}" 
-    value: "{% if YAML2INI_QUOTE_VALUES | default(false) %}\"{% endif %}{{ option.value }}{% if YAML2INI_QUOTE_VALUES | default(false) %}\"{% endif %}" 
-    backup: "{{ YAML2INI_OPTIONS.backup | default(false) }}" 
-    state: "{{ YAML2INI_OPTIONS.state | default('present') }}" 
-    no_extra_spaces: "{{ YAML2INI_OPTIONS.no_extra_spaces | default(false) }}" 
-    create: "{{ YAML2INI_OPTIONS.create | default(true) }}" 
-    allow_no_value: "{{ YAML2INI_OPTIONS.allow_no_value | default(false) }}" 
-    mode: "{{ YAML2INI_OPTIONS.mode | default('0644') }}" 
-    owner: "{{ YAML2INI_OPTIONS.owner | default(omit) }}" 
-    group: "{{ YAML2INI_OPTIONS.group | default(omit) }}" 
-    seuser: "{{ YAML2INI_OPTIONS.seuser | default(omit) }}" 
-    serole: "{{ YAML2INI_OPTIONS.serole | default(omit) }}" 
-    setype: "{{ YAML2INI_OPTIONS.setype | default(omit) }}" 
-    selevel: "{{ YAML2INI_OPTIONS.selevel | default(omit) }}" 
-    unsafe_writes: "{{ YAML2INI_OPTIONS.unsafe_writes | default(false) }}" 
-    attributes: "{{ YAML2INI_OPTIONS.attributes | default(omit) }}" 
+    section: "{{ section.key }}"
+    option: "{{ option.key }}"
+    value: "{% if YAML2INI_QUOTE_VALUES | default(false) %}\"{% endif %}{{ option.value }}{% if YAML2INI_QUOTE_VALUES | default(false) %}\"{% endif %}"
+    backup: "{{ YAML2INI_OPTIONS.backup | default(false) }}"
+    state: "{{ YAML2INI_OPTIONS.state | default('present') }}"
+    no_extra_spaces: "{{ YAML2INI_OPTIONS.no_extra_spaces | default(false) }}"
+    create: "{{ YAML2INI_OPTIONS.create | default(true) }}"
+    allow_no_value: "{{ YAML2INI_OPTIONS.allow_no_value | default(false) }}"
+    mode: "{{ YAML2INI_OPTIONS.mode | default('0644') }}"
+    owner: "{{ YAML2INI_OPTIONS.owner | default(omit) }}"
+    group: "{{ YAML2INI_OPTIONS.group | default(omit) }}"
+    seuser: "{{ YAML2INI_OPTIONS.seuser | default(omit) }}"
+    serole: "{{ YAML2INI_OPTIONS.serole | default(omit) }}"
+    setype: "{{ YAML2INI_OPTIONS.setype | default(omit) }}"
+    selevel: "{{ YAML2INI_OPTIONS.selevel | default(omit) }}"
+    unsafe_writes: "{{ YAML2INI_OPTIONS.unsafe_writes | default(false) }}"
+    attributes: "{{ YAML2INI_OPTIONS.attributes | default(omit) }}"
   when: option.value is string
 
 # - name: Debug Option.value
 #   ansible.builtin.debug:
 #     var: option.value
-#   when: 
+#   when:
 #     - YAML2INI_DEBUG
 #     - option.value is iterable
 #     - option.value is not string
- 
+
 - name: "Multiple values for [{{ section.key }}] - [{{ option.key }}]"
   community.general.ini_file:
-    path: "{{ YAML2INI_OPTIONS.path }}" 
-    section: "{{ section.key }}" 
-    option: "{{ option.key }}" 
+    path: "{{ YAML2INI_OPTIONS.path }}"
+    section: "{{ section.key }}"
+    option: "{{ option.key }}"
     value: "{% if YAML2INI_QUOTE_VALUES | default(false) %}\"{% endif %}{{ value }}{% if YAML2INI_QUOTE_VALUES | default(false) %}\"{% endif %}"
     backup: "{{ YAML2INI_OPTIONS.backup | default(false) }}"
     state: "{{ YAML2INI_OPTIONS.state | default('present') }}"
     no_extra_spaces: "{{ YAML2INI_OPTIONS.no_extra_spaces | default(false) }}"
-    create: "{{ YAML2INI_OPTIONS.create | default(true) }}" 
-    allow_no_value: "{{ YAML2INI_OPTIONS.allow_no_value | default(false) }}" 
-    mode: "{{ YAML2INI_OPTIONS.mode | default('0644') }}" 
-    owner: "{{ YAML2INI_OPTIONS.owner | default(omit) }}" 
-    group: "{{ YAML2INI_OPTIONS.group | default(omit) }}" 
-    seuser: "{{ YAML2INI_OPTIONS.seuser | default(omit) }}" 
-    serole: "{{ YAML2INI_OPTIONS.serole | default(omit) }}" 
-    setype: "{{ YAML2INI_OPTIONS.setype | default(omit) }}" 
-    selevel: "{{ YAML2INI_OPTIONS.selevel | default(omit) }}" 
-    unsafe_writes: "{{ YAML2INI_OPTIONS.unsafe_writes | default(false) }}" 
-    attributes: "{{ YAML2INI_OPTIONS.attributes | default(omit) }}" 
-    exclusive: no
+    create: "{{ YAML2INI_OPTIONS.create | default(true) }}"
+    allow_no_value: "{{ YAML2INI_OPTIONS.allow_no_value | default(false) }}"
+    mode: "{{ YAML2INI_OPTIONS.mode | default('0644') }}"
+    owner: "{{ YAML2INI_OPTIONS.owner | default(omit) }}"
+    group: "{{ YAML2INI_OPTIONS.group | default(omit) }}"
+    seuser: "{{ YAML2INI_OPTIONS.seuser | default(omit) }}"
+    serole: "{{ YAML2INI_OPTIONS.serole | default(omit) }}"
+    setype: "{{ YAML2INI_OPTIONS.setype | default(omit) }}"
+    selevel: "{{ YAML2INI_OPTIONS.selevel | default(omit) }}"
+    unsafe_writes: "{{ YAML2INI_OPTIONS.unsafe_writes | default(false) }}"
+    attributes: "{{ YAML2INI_OPTIONS.attributes | default(omit) }}"
+    exclusive: false
   loop: "{{ option.value if option.value is iterable and option.value is not string else [] }}"
   loop_control:
     loop_var: value
